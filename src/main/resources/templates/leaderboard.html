@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta charset="ISO-8859-1">
+<title>Leaderboard</title>
+<link href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"
+	rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<h1>Leaderboard</h1>
+	<table class="table table-striped">
+		<tr>
+			<th>Username</th>
+			<th>Points</th>
+			<th>Total amount of topics completed</th>
+		</tr>
+		<tr th:each="user : ${users}">
+			<td th:text="${user.nick}"></td>
+			<td th:text="${user.score}"></td>
+			<td th:text="${#lists.size(user.completedTopics)}"></td>
+		</tr>
+	</table>
+</body>
+</html>

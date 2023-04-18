@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta charset="ISO-8859-1">
+<title>Quiz results</title>
+<link href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"
+	rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<p>The results are in!</p>
+	<p>Your total points from the quiz: <span th:text="${points}"></span></p>
+	<div> 
+		<div th:if="${a1correct}">Question 1: Correct!</div>
+		<div th:unless="${a1correct}">Question 1: Wrong!
+			<p>Correct answer: <span th:text="${topic.Quiz.a1}"></span></p>
+			<p>Your answer: <span th:text="${answer1}"></span></p>
+		</div>
+	</div>
+	<div> 
+		<div th:if="${a2correct}">Question 2: Correct!</div>
+		<div th:unless="${a2correct}">Question 2: Wrong!
+			<p>Correct answer: <span th:text="${topic.Quiz.a2}"></span></p>
+			<p>Your answer: <span th:text="${answer2}"></span></p>
+		</div>
+	</div>
+	<div> 
+		<div th:if="${a3correct}">Question 3: Correct!</div>
+		<div th:unless="${a3correct}">Question 3: Wrong!
+			<p>Correct answer: <span th:text="${topic.Quiz.a3}"></span></p>
+			<p>Your answer: <span th:text="${answer3}"></span></p>
+		</div>
+	</div>
+	<form th:action="@{../}">
+		<input type="submit" value="Back to the main page"/>
+	</form>
+</body>
+</html>

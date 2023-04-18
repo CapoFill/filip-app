@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta charset="ISO-8859-1">
+<title>Add a new topic</title>
+<link href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"
+	rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<h1>Add a new topic</h1>
+	<p>Thank you for sharing your love of this topic you are about to
+		share! Feel free to use the "Additional comments" textbox for any
+		hints, extra information or other words to the person that will
+		eventually learn about your topic!</p>
+	<div>
+		<form class="form-group" th:object="${topic}" th:action="@{save}"
+			action="#" method="post">
+			<label for="inpTitle">Title</label><br> <input type="text"
+				id="inpTitle" th:field="*{title}" autocomplete="off" required /><br>
+			<label for="inpUrl1">URL 1</label><br> <input type="text"
+				id="inpUrl1" th:field="*{url1}" autocomplete="off" required /><br>
+			<label for="inpUrl2">URL 2</label><br> <input type="text"
+				id="inpUrl2" th:field="*{url2}" autocomplete="off" required /><br>
+			<label for="inpUrl3">URL 3</label><br> <input type="text"
+				id="inpUrl3" th:field="*{url3}" autocomplete="off" required /><br>
+			<label for="inpUserHints">Any hints to the topic?</label><br> <input
+				type="text" id="inpUserHints" th:field="*{userHints}" required /><br>
+			<label for="inpTimeExpected">Total time expected for
+				completion</label><br> <input type="number" id="inpTimeExpected"
+				th:field="*{timeExpected}" required /><br>
+			<br> <label for="categoryList">Category</label><br> <select
+				id="categoryList" th:field="*{category}" class="form-control"
+				required>
+				<option th:each="category: ${categories}"
+					th:value="${category.categoryId}" th:text="${category.name}"></option>
+			</select><div>Is a suitable category not here? <a href="../addCategory">Create a new category</a></div><br>
+			<h1>Quiz for the topic</h1>
+			<br>
+			<div th:object="${quiz}">
+				<label for="inpQuestion1">Question 1</label><br> <input
+					type="text" id="inpQuestion1" th:field="*{q1}" autocomplete="off"
+					required /><br> <label for="inpAnswer1">Answer to
+					question 1</label><br> <input type="text" id="inpAnswer1"
+					th:field="*{a1}" autocomplete="off" required /><br> <label
+					for="inpQuestion2">Question 2</label><br> <input type="text"
+					id="inpQuestion2" th:field="*{q2}" autocomplete="off" required /><br>
+				<label for="inpAnswer1">Answer to question 2</label><br> <input
+					type="text" id="inpAnswer2" th:field="*{a2}" autocomplete="off"
+					required /><br> <label for="inpQuestion3">Question 3</label><br>
+				<input type="text" id="inpQuestion3" th:field="*{q3}"
+					autocomplete="off" required /><br> <label for="inpAnswer3">Answer
+					to question 3</label><br> <input type="text" id="inpAnswer3"
+					th:field="*{a3}" autocomplete="off" required /><br>
+			</div>
+			<input type="submit">
+		</form>
+	</div>
+
+
+</body>
+</html>

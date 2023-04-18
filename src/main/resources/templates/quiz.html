@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta charset="ISO-8859-1">
+<title>Quiz</title>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
+<script type="text/javascript">
+	$.get("/user", function(data) {
+		var inputF = document.getElementById("id");
+		inputF.value = data.id;
+	});
+</script>
+<link href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"
+	rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<p>Now that you've learned about this topic, it's time to see what
+		you've learned. But don't take it too seriously, it's all in good fun!</p>
+	<br>
+	<div>
+		<form class="form-group" th:object="${topic}"
+			th:action="@{../quizCheck}" action="#" method="post">
+			<div th:text="${title}"></div>
+			<label for="topicId">Topic ID</label> <input id="topicId"
+				type="number" th:field="*{topicId}" readonly="readonly"
+				autocomplete="off" required /><br> <br> <label
+				for="inpQuestion1" th:text="${topic.Quiz.q1}"></label><br> <input
+				type="text" id="inpQuestion1" th:name="answer1"
+				th:placeholder="${#strings.toLowerCase(topic.Quiz.a1.replaceAll('[A-Za-z0-9]', '*'))}"
+				autocomplete="off" required /><br> <label for="inpQuestion1"
+				th:text="${topic.Quiz.q2}"></label><br> <input type="text"
+				id="inpQuestion1" th:name="answer2"
+				th:placeholder="${#strings.toLowerCase(topic.Quiz.a2.replaceAll('[A-Za-z0-9]', '*'))}"
+				autocomplete="off" required /><br> <label for="inpQuestion1"
+				th:text="${topic.Quiz.q3}"></label><br> <input type="text"
+				id="inpQuestion1" th:name="answer3"
+				th:placeholder="${#strings.toLowerCase(topic.Quiz.a3.replaceAll('[A-Za-z0-9]', '*'))}"
+				autocomplete="off" required /><br> <input type="submit" />
+		</form>
+	</div>
+</body>
+</html>

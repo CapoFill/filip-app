@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta charset="ISO-8859-1">
+<title>Topic already completed!</title>
+<link href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"
+	rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<h1>Topic already completed!</h1>
+	<p>It seems as though you have already completed this topic.</p>
+	<br>
+	<form th:action="@{../}">
+		<input type="submit" value="Back to the main page" />
+	</form>
+</body>
+</html>

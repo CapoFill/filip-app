@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta charset="ISO-8859-1">
+<title>Satisfy Your Curiosity</title>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
+
+<script type="text/javascript">
+	$.get("/user", function(data) {
+		$("#user").html(data.name);
+		$(".unauthenticated").hide()
+		$(".authenticated").show()
+	});
+
+	var logout = function() {
+		$.post("/logout", function() {
+			$("#user").html('');
+			$(".unauthenticated").show();
+			$(".authenticated").hide();
+		})
+		return true;
+	}
+
+	$.ajaxSetup({
+		beforeSend : function(xhr, settings) {
+			if (settings.type == 'POST' || settings.type == 'PUT'
+					|| settings.type == 'DELETE') {
+				if (!(/^http:.*/.test(settings.url) || /^https:.*/
+						.test(settings.url))) {
+					// Only send the token to relative URLs i.e. locally.
+					xhr.setRequestHeader("X-XSRF-TOKEN", Cookies
+							.get('XSRF-TOKEN'));
+				}
+			}
+		}
+	});
+</script>
+<link href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"
+	rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div class="container unauthenticated">
+		Log in with GitHub: <a href="/oauth2/authorization/github">click
+			here</a>
+	</div>
+	<div class="container authenticated" style="display: none">
+		Logged in as: <span id="user"></span><br>
+		<form class="form-group" action="https://github.com/settings/applications">
+			<input type="submit" value="Revoke OAuth token" /><span> Redirects to GitHub</span>
+		</form>
+	</div>
+	<form class="form-group" th:action="@{../leaderboard}">
+		<input type="submit" value="Leaderboard" />
+	</form>
+	<h1>Satisfy Your Curiosity</h1>
+	<p>This is the start of your next learning adventure! Here, you get
+		a choice between 3 random topics. You choose one, and go to the URLs
+		given to learn more about the topic. When you feel like you know the
+		topic, there is a quiz; a 1-pointer, a 2-pointer, and a 3-pointer. The
+		more questions you get correct, the higher on the leaderboard you go!</p>
+	<p>Get started by choosing either "Get topics", or "Create a
+		topic".</p>
+	<form class="form-group" th:action="@{../add}">
+		<input type="submit" value="Create a topic" />
+	</form>
+	<form class="form-group" th:action="@{../getThreeTopics}">
+		<input type="submit" value="Get topics" />
+	</form>
+	<div th:if="${topics != null}">
+		<ul th:each="topic : ${topics}">
+			<li><a th:text="${topic.title}"
+				th:href="@{../topic/{topicId}(topicId=${topic.topicId})}"></a></li>
+		</ul>
+	</div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta charset="ISO-8859-1">
+<title>Add a new category</title>
+<link href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"
+	rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<h1>Add a new category</h1>
+	<form class="form-group" th:object="${category}"
+		th:action="@{saveCategory}" action="#" method="post">
+		<label for="inpCategory">Title</label><br> <input type="text"
+			id="inpName" th:field="*{name}" autocomplete="off" required /><br><br>
+		<input type="submit">
+	</form>
+</body>
+</html>

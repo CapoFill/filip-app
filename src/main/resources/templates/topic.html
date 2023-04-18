@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta charset="ISO-8859-1">
+<title>Topic</title>
+<link href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"
+	rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<p>Today, the exciting topic you will be learning about is <span th:text=${topic.title}></span>.</p>
+	<p>The three URLs you will be starting from are as following:</p>
+	<ul>
+		<li th:text="${topic.url1}" th:href="${topic.url1}"></li>
+		<li th:text="${topic.url2}" th:href="${topic.url2}"></li>
+		<li th:text="${topic.url3}" th:href="${topic.url3}"></li>
+	</ul>
+	<div th:if="${topic.userHints == ''}">No hints for this topic, but a hint from me, the computer: have lots of fun! :D</div>
+	<div th:unless="${topic.userHints == ''}">The submitter of this topic left you a hint. *clears throat* Let me read that out to you.
+		<p th:text="${topic.userHints}"></p>
+	</div>
+	<p>When you feel ready, you can take the quiz by clicking this button.</p>
+	<form th:action="@{../quiz/{topicId}(topicId=${topic.topicId})}">
+    	<input type="submit" value="Quiz time!" />
+	</form>
+</body>
+</html>
